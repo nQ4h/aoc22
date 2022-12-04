@@ -12,10 +12,8 @@ for i in range(nLines):
     num4 = int(range2[1])
     if(num1 >= num3 and num1 <= num4):
         n+=1
-        continue
-    if(num2 >= num3 and num2 <= num4):
+    elif(num2 >= num3 and num2 <= num4):
         n+=1
-        continue
-    if(num3 >= num1 and num3 <= num2):
+    elif(num3 >= num1 and num3 <= num2):
         n+=1
 print(n)
