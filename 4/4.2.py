@@ -18,5 +18,4 @@ for i in range(nLines):
         continue
     if(num3 >= num1 and num3 <= num2):
         n+=1
-        continue
 print(n)
