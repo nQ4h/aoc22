@@ -13,14 +13,9 @@ stack9 = ['R','P','M','L','H']
 stackList = [0,stack1,stack2,stack3,stack4,stack5,stack6,stack7,stack8,stack9]
 
 for i in range(nLines):
-    str = input()
-    list = str.split(" ")
+    list = input().split(" ")
     for x in range(int(list[1])):
-        temp1 = stackList[int(list[3])]
-        elem = temp1.pop()
-        temp2 = stackList[int(list[5])]
-        temp2.append(elem)
-for x in range(1,10):
-    temp = stackList[x]
-    print(temp[-1], end="")
+        stackList[int(list[5])].append(stackList[int(list[3])].pop())
+for x in range(1,len(stackList)):
+    print(stackList[x][-1], end="")
 print("")
