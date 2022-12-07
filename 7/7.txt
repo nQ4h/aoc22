@@ -1002,3 +1002,6 @@ $ cd ..
 $ cd zmj
 $ ls
 160097 fgt.tfr
+$ cd ..
+$ cd ..
+$ cd ..
