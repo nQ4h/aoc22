@@ -1,85 +1,39 @@
-with open("t.txt", 'r') as fp:
-    nLines = len(fp.readlines())
-
-map = []
+map = open("8.txt", "r").read().splitlines()
 seen = []
-visibleTrees = 0
-for i in range(nLines):
-    map.append(input())
+nRows = len(map)
 
-for i in range(nLines):
+for i in range(nRows):
     str = [0]
     for i in range(len(map[i])-1):
         str.append(0)
     seen.append(str)
 
-#i row, j column
-#Check from left to right
-print("Left to right:")
-for i in range(0, nLines):
-    for j in range(0, len(map[i])):
-        if(int(map[i][j])<int(map[i][j+1])):
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],"<", map[i][j+1], "\t-> visibleTrees = ", visibleTrees)
-        else:
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],">=", map[i][j+1], "\t-> visibleTrees = ", visibleTrees)
-            break
+def findHorizontal(jStart, jEnd, jIncrement):
+    trees = 0
+    for i in range(nRows):
+        max = -1
+        for j in range(jStart, jEnd, jIncrement):
+            if(int(map[i][j])>int(max)):
+                max = map[i][j]
+                if(not int(seen[i][j])):
+                    trees += 1
+                    seen[i][j] = 1
+    return trees
 
-#Check from right to left
-print("Right to left:")
-for i in range(0, nLines):
-    for j in range(len(map[i])-1, 0, -1):
-        if(int(map[i][j])<int(map[i][j-1])):
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],"<", map[i][j-1], "\t-> visibleTrees = ", visibleTrees)
-        else:
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],">=", map[i][j-1], "\t-> visibleTrees = ", visibleTrees)
-            break
+def findVertical(iStart, iEnd, iIncrement):
+    trees = 0
+    for j in range(nRows):
+        max = -1
+        for i in range(iStart, iEnd, iIncrement):
+            if(int(map[i][j])>int(max)):
+                max = map[i][j]
+                if(not int(seen[i][j])):
+                    trees += 1
+                    seen[i][j] = 1
+    return trees
 
-#Check from top to bottom
-print("Top to bottom:")
-for j in range(0, len(map[i])):
-    for i in range(0,nLines-1):
-        if(int(map[i][j]) < int(map[i+1][j])):
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],"<", map[i+1][j], "\t-> visibleTrees = ", visibleTrees)
-        else:
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],">=", map[i+1][j], "\t-> visibleTrees = ", visibleTrees)
-            break
+def main():
+    print(findHorizontal(0, nRows, 1) + findHorizontal(nRows-1, -1, -1) + findVertical(0, nRows, 1) + findVertical(nRows-1, -1, -1))
 
-#Check from bottom to top
-print("Bottom to top:")
-for j in range(0, len(map[i])):
-    for i in range(nLines-1, 0, -1):
-        if(int(map[i][j]) < int(map[i-1][j])):
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],"<", map[i-1][j], "\t-> visibleTrees = ", visibleTrees)
-        else:
-            if(not seen[i][j]):
-                visibleTrees += 1
-                seen[i][j] = 1
-            print(map[i][j],">=", map[i-1][j], "\t-> visibleTrees = ", visibleTrees)
-            break
-
-for i in range(nLines):
-    print(map[i])
-
-for i in range(nLines):
-    print(seen[i])
+if __name__ == "__main__":
+    main()
